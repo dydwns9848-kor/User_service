@@ -1,6 +1,7 @@
 package com.example.user.entity;
 
 
+import com.example.user.dto.LoginUserResponseDTO;
 import com.example.user.dto.SignupUserDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +13,6 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor      // 파라미터가 없는 생성자
 @AllArgsConstructor     // 모든 필드를 입력으로 받는 생성자
-@Builder
 public class User {
 
     @Id
@@ -58,6 +58,14 @@ public class User {
         user.setPassword(dto.getPassword());
         user.setNickName(dto.getNick_name());
         return user;
+    }
+
+    public static LoginUserResponseDTO toLoginUserResponse(User user) {
+        LoginUserResponseDTO dto = new LoginUserResponseDTO();
+        dto.setId(user.getId());
+        dto.setEmail(user.getEmail());
+        dto.setNick_name(user.getNickName());
+        return dto;
     }
 }
 
